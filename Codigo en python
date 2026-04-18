@@ -1,0 +1,84 @@
+import random
+import matplotlib.pyplot as plt
+
+# Definimos las opciones
+uno = 0
+dos = 0
+tres = 0
+cuatro = 0
+cinco = 0
+seis = 0
+i = 0
+opciones = ["Uno", "Dos", "Tres", "Cuatro", "Cinco", "Seis"]
+
+# El algoritmo elige una al azar
+while i < 10000:
+    resultado = random.choice(opciones)
+    i = i + 1
+    if resultado == "Uno":
+        uno = uno + 1
+    if resultado == "Dos":
+        dos = dos + 1
+    if resultado == "Tres":
+        tres = tres + 1
+    if resultado == "Cuatro":
+        cuatro = cuatro + 1
+    if resultado == "Cinco":
+        cinco = cinco + 1
+    if resultado == "Seis":
+        seis = seis + 1
+print("Total de lanzamientos = ", i)
+print("Veces que salio uno = ", uno)
+print("Veces que salio dos = ", dos)
+print("Veces que salio tres = ", tres)
+print("Veces que salio cuatro = ", cuatro)
+print("Veces que salio cinco = ", cinco)
+print("Veces que salio seis = ", seis) 
+print("Probabilidad teorica: 1/6 (16,67%)")
+
+# Probabilidad empirica
+
+lanzamientos = 10000
+
+probEmpirica1 = (uno / lanzamientos) * 100
+probEmpirica2 = (dos / lanzamientos) * 100
+probEmpirica3 = (tres / lanzamientos) * 100
+probEmpirica4 = (cuatro / lanzamientos) * 100
+probEmpirica5 = (cinco / lanzamientos) * 100
+probEmpirica6 = (seis / lanzamientos) * 100
+
+print(f"Probabilidad empirica del 1: {probEmpirica1:.2f}%")
+print(f"Probabilidad empirica del 2: {probEmpirica2:.2f}%")
+print(f"Probabilidad empirica del 3: {probEmpirica3:.2f}%")
+print(f"Probabilidad empirica del 4: {probEmpirica4:.2f}%")
+print(f"Probabilidad empirica del 5: {probEmpirica5:.2f}%")
+print(f"Probabilidad empirica del 6: {probEmpirica6:.2f}%")
+
+# Histograma
+resultados = [uno, dos, tres, cuatro, cinco, seis]
+caras = [1, 2, 3, 4, 5, 6]
+
+# 2. Crear el gráfico de barras
+plt.figure(figsize=(8, 6))
+plt.bar(caras, resultados, color='skyblue', edgecolor='black', alpha=0.8)
+
+# 3. Añadir una línea de referencia para la probabilidad teórica (1666.7 veces)
+frecuencia_teorica = 10000 / 6
+plt.axhline(y=frecuencia_teorica, color='red', linestyle='--', label=f'Teórica ({frecuencia_teorica:.1f})')
+
+# 4. Personalizar el gráfico (Títulos y etiquetas)
+plt.title('Distribución de 10,000 Lanzamientos de Dado', fontsize=14)
+plt.xlabel('Cara del Dado', fontsize=12)
+plt.ylabel('Frecuencia (Veces obtenidas)', fontsize=12)
+plt.xticks(caras) # Asegura que se vean los números 1 al 6
+plt.legend() # Muestra la leyenda de la línea roja
+
+# 5. Opcional: Poner el número exacto encima de cada barra
+for i, v in enumerate(resultados):
+    plt.text(caras[i], v + 10, str(v), ha='center', fontweight='bold')
+
+# 6. Mostrar el gráfico
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
+
+
